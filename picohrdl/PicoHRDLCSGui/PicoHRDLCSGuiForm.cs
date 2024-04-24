@@ -49,6 +49,13 @@ namespace PicoHRDLGui
                                                                        (short)Imports.HRDLRange.HRDL_2500_MV, 
                                                                        1);
 
+                // Set Input channel 1 - enabled, range = 2500mV, single ended
+                analogChannelStatus = Imports.SetAnalogInChannel(handle,
+                                                                       (short)Imports.HRDLInputs.HRDL_ANALOG_IN_CHANNEL_3,
+                                                                       1,
+                                                                       (short)Imports.HRDLRange.HRDL_2500_MV,
+                                                                       1);
+
                 // Set Interval time = 80 ms, conversion time = 60 ms
                 short returnIntervalStatus = Imports.SetInterval(handle, 80, (short)Imports.HRDLConversionTime.HRDL_60MS); 
 

@@ -73,6 +73,34 @@ namespace PL1000CSConsole
             }
         }
 
+        void TakeReading(Imports.enPL1000Inputs Channel)
+        {
+            ushort reading;
+            Imports.Enumerate(_handle, Channel, out reading);
+            Console.WriteLine("Raw reading: " + reading.ToString());
+
+            ushort max;
+            Imports.MaxValue(_handle, out max);
+            Console.WriteLine("Max reading: " + reading.ToString());
+
+            double value = (ushort)reading * 2.5 /(ushort)max;
+            Console.WriteLine("Reading: " + value.ToString());
+        }
+
+        void MaxReading()
+        {
+            ushort reading;
+            Imports.MaxValue(_handle, out reading);
+            Console.WriteLine("Max reading: " + reading.ToString());
+        }
+
+        void TakeRawReading()
+        {
+            ushort reading;
+            Imports.Enumerate(_handle, Imports.enPL1000Inputs.PL1000_CHANNEL_1, out reading);
+            Console.WriteLine("Raw reading: " + reading.ToString());
+        }
+
 
         /***********************************************************************************************
         * Run()
@@ -83,6 +111,7 @@ namespace PL1000CSConsole
         {
             // Display unit information
             GetDeviceInfo();
+            TakeReading(Imports.enPL1000Inputs.PL1000_CHANNEL_9);
         }
 
         /***********************************************************************************************
@@ -123,6 +152,9 @@ namespace PL1000CSConsole
 
                 PL1000CSConsole consoleExample = new PL1000CSConsole(handle);
                 consoleExample.Run();
+
+                
+
 
                 Console.WriteLine();
                 Console.WriteLine("Press any key to exit the application.");
